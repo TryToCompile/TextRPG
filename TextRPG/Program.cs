@@ -21,6 +21,9 @@ if (ReadLine() == "1")
     player.WeaponAttack = 100;
     player.CritDamageChance = 5; // TODO: add randomiser in
 }
+WriteLine(player.ShowProfile());
+
+
 
 while (player.Hpbar > 0)
 {
@@ -50,11 +53,21 @@ namespace textRPG
     public class Player : Creature
     {
         private double weaponAttack;
-        private double attack = weaponAttack + AttackPower;
+        private double attack = 10;
         private double critDamageChance = 10;
         public double CritDamageChance { get; set; }
-        public double Attack { get; set; }
+        public double Attack
+        {
+            get { return attack*weaponAttack; } // TODO: check if (this) here is really needed ( этот кусок почему-то не паша!, атака равна нулю в консольке )
+            set { attack = value; }
+        }
         public double WeaponAttack { get; set; }
+
+
+        public string ShowProfile ()
+        {
+            return $"Name:{Name} attack:{Attack} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack}";
+        }
     }
 
     
