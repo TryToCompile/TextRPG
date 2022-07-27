@@ -5,6 +5,9 @@ using static System.Console;
  * 1) Hi, warrior, choose your name
  * 2) Fight the rat
  * 3) Add system, that allows palyer to type some commands, that will give him information about his stats, profile
+ * 
+ * !) Main loop - > we are using (findFight) and fighting with random guys, until we have lvlup. when we have lvledup, we have opportinity to fight boss. 
+ * !) Randomly, we could have an opportunity to fight boss earlier, to have some + effects
  */
 var input = "undefined";
 Player player = new Player();
@@ -17,7 +20,7 @@ if (input == "1")
 {
     player.WeaponAttack = 10;
     player.CritDamageChance = 33; // TODO: add randomiser in
-} else if (input == "2"
+} else if (input == "2")
 {
     player.WeaponAttack = 100;
     player.CritDamageChance = 5; // TODO: add randomiser in
@@ -25,10 +28,18 @@ if (input == "1")
 WriteLine(player.ShowProfile());
 WriteLine(player.Attack());
 
-
+// The main loop of the game
 while (player.Hpbar > 0)
 {
-
+    input = ReadLine();
+    if (input == "stats")
+    {
+        WriteLine(player.ShowProfile());
+    }
+    else if (input == "FindFight")
+    {
+        player.FindFight();
+    }
 }
 
 
@@ -73,6 +84,11 @@ namespace textRPG
         public double Attack() {
             Damage = WeaponAttack + AttackPower;
             return Damage;
+        }
+
+        public void FindFight()
+        {
+
         }
 
     }
