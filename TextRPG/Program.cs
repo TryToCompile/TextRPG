@@ -8,95 +8,61 @@ using static System.Console;
  * 
  * !) Main loop - > we are using (findFight) and fighting with random guys, until we have lvlup. when we have lvledup, we have opportinity to fight boss. 
  * !) Randomly, we could have an opportunity to fight boss earlier, to have some + effects
+ * 
+ * 
+ * ?) I will generate enemy characters randomly or i will have a list of them to use and
+ * ?) For now, i think, it's better to only use a list, and later, maybe, random
+ * 
  */
-var input = "undefined";
-Player player = new Player();
-
-WriteLine("Warrior!\nChoose ur name:");
-player.Name = ReadLine(); // TODO: check for exceptions with numbers or spaces or so
-WriteLine($"We are greeting u, the future god - { player.Name}!\nChoose ur weapon -> 1 - assassin's blades (10 dmg); 2 - HAMMER OF THE PURE SOUL (100 dmg) ");
-input = ReadLine();
-if (input == "1")
-{
-    player.WeaponAttack = 10;
-    player.CritDamageChance = 33; // TODO: add randomiser in
-} else if (input == "2")
-{
-    player.WeaponAttack = 100;
-    player.CritDamageChance = 5; // TODO: add randomiser in
-}
-WriteLine(player.ShowProfile());
-WriteLine(player.Attack());
-
-// The main loop of the game
-while (player.Hpbar > 0)
-{
-    input = ReadLine();
-    if (input == "stats")
-    {
-        WriteLine(player.ShowProfile());
-    }
-    else if (input == "FindFight")
-    {
-        player.FindFight();
-    }
-}
-
 
 namespace textRPG
 {
-    public class Creature
+    public partial class Loop
     {
-        private string? name = "Undefined";
-        private double hpbar = 100;
-        private double manapool = 100;
-        private double stamina = 100;
-        private double staminaForAttack = 10;
-        private double armour = 10;
-        private double attackPower = 10;
-        private double damage = 0;
-        public double Damage { get; set; }
-        public double StaminaForAttack { get; set; }
-        public virtual double AttackPower { get => attackPower; set => attackPower = value; } // по какой-то причине, чтобы оверрайд нормально работал, нужно виртуальное свойство определять с этими стрелочками...
-        public double Armor { get; set; }
-        public string? Name { get; set; }
-        public double Hpbar { get; set; }
-        public double Manapool { get; set; }
-        public double Stamina { get; set; }
-
-    }
-
-    public class Player : Creature
-    {
-      //  private double weaponAttack = 1; // bare hands
-       // private double attack = 10;
-        private double critDamageChance = 10;
-        public double WeaponAttack { get; set; }
-        public double CritDamageChance { get; set; }
-
-        public override double AttackPower { get => base.AttackPower; set => base.AttackPower = value; }
-        // почитать про сокрытие
-        public string ShowProfile ()
-        {
-            return $"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack}";
-        }
-
-        public double Attack() {
-            Damage = WeaponAttack + AttackPower;
-            return Damage;
-        }
-
-        public void FindFight()
+        public static void Main(string[] args)
         {
 
+
+            var input = "undefined";
+            Player player = new Player();
+
+
+            WriteLine("!!!!To end the game just type End!!!!\n!!!!To fight just type FF or FindFight!!!!\n!!!!To see profile just type profile!!!!");
+            WriteLine("Warrior!\nChoose ur name:");
+            player.Name = ReadLine(); // TODO: check for exceptions with numbers or spaces or so
+            WriteLine($"We are greeting u, the future god - { player.Name}!\nChoose ur weapon -> 1 - assassin's blades (10 dmg); 2 - HAMMER OF THE PURE SOUL (100 dmg) ");
+            input = ReadLine();
+            if (input == "1")
+            {
+                player.WeaponAttack = 10;
+                player.CritDamageChance = 33; // TODO: add randomiser in
+            }
+            else if (input == "2")
+            {
+                player.WeaponAttack = 100;
+                player.CritDamageChance = 5; // TODO: add randomiser in
+            }
+
+            // The main loop of the game
+            //while (player.HpBar > 0)
+            while (true)
+            {
+                WriteLine("----------------NewLoop is here--------------------");
+                input = ReadLine();
+                if (input == "FindFight" || input == "FF" || input == "ff" || input == "findfight")
+                {
+                    player.FindFight();
+                }
+                else if (input == "End" || input == "end")
+                {
+                    return;
+                }
+                else if (input == "Profile" || input == "profile")
+                {
+                    player.ShowProfile();
+                }
+            }
         }
-
-    }
-
-    
-    public class Rat : Creature
-    {
-
     }
 
     
