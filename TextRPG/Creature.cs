@@ -16,6 +16,7 @@ namespace textRPG
 {
     public class Creature
     {
+        // TODO: разобраться в наследовании тут, кажется, тут то самое поднятие и наоборотие
         private string? name = "Undefined";
         private double hpBar = 100;
         private double manapool = 100;
@@ -38,7 +39,7 @@ namespace textRPG
         public double Manapool { get; set; }
         public double Stamina { get; set; }
         public virtual double AttackPower { get => attackPower; set => attackPower = value; } // по какой-то причине, чтобы оверрайд нормально работал, нужно виртуальное свойство определять с этими стрелочками...
-
+    
     }
 
     

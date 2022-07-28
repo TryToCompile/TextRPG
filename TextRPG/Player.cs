@@ -20,29 +20,44 @@ namespace textRPG
         //  private double weaponAttack = 1; // bare hands
         // private double attack = 10;
         private double magicAttack = 0;
+
         public double MagicDamage { get; set; }
         public double WeaponAttack { get; set; }
 
         public override double AttackPower { get => base.AttackPower; set => base.AttackPower = value; }
         // почитать про сокрытие
+
+
+        public Player(double hp, double mp, double stamina, double staminaForAttack)
+        {
+            HpBar = hp;
+            Manapool = mp;
+            Stamina = stamina;
+            StaminaForAttack = staminaForAttack;
+        }
         public void ShowProfile ()
         {
-            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack} Hp:{HpBar} mp:{Manapool}");
+            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack} Hp:{HpBar} mp:{Manapool}\n stamina:{Stamina}");
             return ;
         }
 
-        public double Attack(Enemy enemy) {
+        public void Attack(Enemy enemy) {
             Damage = WeaponAttack + AttackPower;
-            if( Stamina > StaminaForAttack )
+            if( Stamina >= StaminaForAttack )
             {
+                WriteLine($"DEBUG player.attack stamina{Stamina} StAttack{StaminaForAttack}");
                 Stamina -= StaminaForAttack;
                 enemy.HpBar -= Damage - enemy.Armor;
 
+            } else
+            {
+                WriteLine($"{Name} have not enough stamina:{Stamina}");
             }
-            return enemy.HpBar;
+            WriteLine($"Enemy Hp:{enemy.HpBar}; Enemy Stamina{enemy.Stamina}");
+            return;
         }
 
-        public double MagicAttack(Enemy enemy)
+        public void MagicAttack(Enemy enemy)
         {
             Damage = MagicDamage;
             if (Stamina > StaminaForAttack)
@@ -51,7 +66,8 @@ namespace textRPG
                 enemy.HpBar -= Damage - enemy.MagicArmor;
 
             }
-            return enemy.HpBar;
+            WriteLine($"Enemy Hp:{enemy.HpBar}");
+            return;
         }
 
         public void FindFight()

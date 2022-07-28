@@ -19,45 +19,51 @@ namespace textRPG
     {
         public void ShowEnemyProfile()
         {
-            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} hp:{HpBar} mp:{Manapool}");
+            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} hp:{HpBar} mp:{Manapool} stamina:{Stamina}");
             return;
         } 
 
-        public Enemy(string name, double attackPower, double critDamageChance, double hpbar,double manapool)
+        public Enemy(string name, double attackPower, double critDamageChance, double hpbar,double manapool, double stamina, double staminaForAttack)
         {
             Name = name;
             AttackPower = attackPower;
             CritDamageChance = critDamageChance;
             HpBar = hpbar;
             Manapool = manapool;
+            Stamina = stamina;
+            StaminaForAttack = staminaForAttack;
+            WriteLine("bzz...Enemy Created...bzzz.....stats:");
             ShowEnemyProfile();
         }
 
-        public double Attack(Player player)
+        public void Attack(Player player)
         {
             Damage = AttackPower;
-            if (Stamina > StaminaForAttack)
+            if (Stamina >= StaminaForAttack)
             {
+                WriteLine($"DEBUG enemy.attack stamina{Stamina} StAttack{StaminaForAttack}");
                 Stamina -= StaminaForAttack;
                 player.HpBar -= Damage - player.Armor;
 
-            } else if (Stamina < StaminaForAttack)
+            } else 
             {
                 WriteLine($"{Name} have not enough stamina:{Stamina}");
             }
-            return player.HpBar;
+            WriteLine($"Player Hp:{player.HpBar}");
+            return;
         }
 
-        public double MagicAttack(Player player)
+        public void MagicAttack(Player player)
         {
             Damage = MagicDamage;
-            if (Stamina > StaminaForAttack)
+            if (Stamina >= StaminaForAttack)  // TODO: change stamina for mp
             {
                 Stamina -= StaminaForAttack;
                 player.HpBar -= Damage - player.MagicArmor;
 
             }
-            return player.HpBar;
+            WriteLine($"Player Hp:{player.HpBar}; Player Stamina:{player.Stamina}");
+            return;
         }
 
 

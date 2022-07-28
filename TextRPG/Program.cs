@@ -22,11 +22,12 @@ namespace textRPG
         public static void Main(string[] args)
         {
 
-
             var input = "undefined";
-            Player player = new Player();
+            Player player = new Player(100,0,100,10); // Вероятно, нужно привести типы, да, разобраться с наследованием этих классов
             Loop loop = new Loop();
-
+ //           player.HpBar = 100; // КОСТЫЛЬ
+ //           player.Stamina = 100;
+ //           player.StaminaForAttack = 10;
             WriteLine("!!!!To end the game just type End!!!!\n!!!!To fight just type FF or FindFight!!!!\n!!!!To see profile just type profile!!!!");
             WriteLine("Warrior!\nChoose ur name:");
             player.Name = ReadLine(); // TODO: check for exceptions with numbers or spaces or so
@@ -47,13 +48,13 @@ namespace textRPG
             //while (player.HpBar > 0)
             while (true)
             {
-                WriteLine("----------------NewLoop is here--------------------");
+                WriteLine("FF - new fight, profile - see stats, end - end of the game");
                 input = ReadLine();
                 if (input == "FindFight" || input == "FF" || input == "ff" || input == "findfight")
                 {
                     // player.FindFight();
                     Random rand = new Random(); //TODO: create enum or list or array with enemy warriors and another one with bosses
-                    Enemy enemy = new Enemy("Rat", 40, 1, 200, 0);
+                    Enemy enemy = new Enemy("Rat", 40, 1, 200, 0, 40, 20);
                     WriteLine($"Here's ur opponent, print y/n to fight or to see the next opponent!");
                     input = ReadLine();
                     if (input == "fight" || input == "Fight" || input == "y")

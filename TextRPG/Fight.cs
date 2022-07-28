@@ -36,12 +36,12 @@ namespace textRPG
             // FIGHT LOOP
             while (true)
             {
-                if (player.HpBar < 0)
+                if (player.HpBar <= 0)
                 {
                     WriteLine($"{player.Name} hp is < 0. DEATH");
                     break;
                 }
-                else if (enemy.HpBar < 0)
+                else if (enemy.HpBar <= 0)
                 {
                     WriteLine($"{enemy.Name} hp is < 0. WIN? "); // TODO: add last chance to kill our player with 0.001% probability, while enemy has < 0 hps
                 }
@@ -52,6 +52,7 @@ namespace textRPG
                     break;
                 } else if (input == "y")
                 {
+                //    WriteLine($"player.stamina:{player.Stamina}; enemy.stamina{enemy.Stamina}");
                     WriteLine("Ok!Next step ->");// TODO: add variants of attacks (magick, strong/weak attack, or block)
                     player.Attack(enemy);
                     enemy.Attack(player);
