@@ -1,4 +1,5 @@
-﻿/* TODO: 
+﻿using static System.Console;
+/* TODO: 
  * 1) Hi, warrior, choose your name
  * 2) Fight the rat
  * 3) Add system, that allows palyer to type some commands, that will give him information about his stats, profile
@@ -16,11 +17,22 @@ namespace textRPG
 {
     public partial class Loop
     {
-        public class Fight {
-            public Fight(Player player, Enemy enemy)
-            {
+       // public class Fight {
+       //     public Fight(Player player, Enemy enemy)
+       //     {
+       //         player.ShowProfile();
+       //         WriteLine("VS\n");
+       //         enemy.ShowEnemyProfile();
+       //         
+       //     }
+       // }
 
-            }
+        public void Fight(Player player, Enemy enemy)
+        {
+            player.ShowProfile();
+            WriteLine("VS");
+            enemy.ShowEnemyProfile();
+            
         }
     }
 

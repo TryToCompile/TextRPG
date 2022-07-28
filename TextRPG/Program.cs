@@ -25,7 +25,7 @@ namespace textRPG
 
             var input = "undefined";
             Player player = new Player();
-
+            Loop loop = new Loop();
 
             WriteLine("!!!!To end the game just type End!!!!\n!!!!To fight just type FF or FindFight!!!!\n!!!!To see profile just type profile!!!!");
             WriteLine("Warrior!\nChoose ur name:");
@@ -51,7 +51,15 @@ namespace textRPG
                 input = ReadLine();
                 if (input == "FindFight" || input == "FF" || input == "ff" || input == "findfight")
                 {
-                    player.FindFight();
+                    // player.FindFight();
+                    Random rand = new Random(); //TODO: create enum or list or array with enemy warriors and another one with bosses
+                    Enemy enemy = new Enemy("Rat", 40, 1, 200, 0);
+                    WriteLine($"Here's ur opponent, print y/n to fight or to see the next opponent!");
+                    input = ReadLine();
+                    if (input == "fight" || input == "Fight")
+                    {
+                        loop.Fight(player,enemy);
+                    }
                 }
                 else if (input == "End" || input == "end")
                 {
@@ -61,6 +69,7 @@ namespace textRPG
                 {
                     player.ShowProfile();
                 }
+                
             }
         }
     }

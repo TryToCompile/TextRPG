@@ -17,9 +17,10 @@ namespace textRPG
 {
     public class Player : Creature
     {
-      //  private double weaponAttack = 1; // bare hands
-       // private double attack = 10;
-
+        //  private double weaponAttack = 1; // bare hands
+        // private double attack = 10;
+        private double magicAttack = 0;
+        public double MagicDamage { get; set; }
         public double WeaponAttack { get; set; }
 
         public override double AttackPower { get => base.AttackPower; set => base.AttackPower = value; }
@@ -30,16 +31,32 @@ namespace textRPG
             return ;
         }
 
-        public double Attack() {
+        public double Attack(Enemy enemy) {
             Damage = WeaponAttack + AttackPower;
-            return Damage;
+            if( Stamina > StaminaForAttack )
+            {
+                Stamina -= StaminaForAttack;
+                enemy.HpBar -= Damage - enemy.Armor;
+
+            }
+            return enemy.HpBar;
+        }
+
+        public double MagicAttack(Enemy enemy)
+        {
+            Damage = MagicDamage;
+            if (Stamina > StaminaForAttack)
+            {
+                Stamina -= StaminaForAttack;
+                enemy.HpBar -= Damage - enemy.MagicArmor;
+
+            }
+            return enemy.HpBar;
         }
 
         public void FindFight()
         {
-            Random rand = new Random(); //TODO: create enum or list or array with enemy warriors and another one with bosses
-            Enemy enemy = new Enemy("Rat",40,1,200,0);
-            WriteLine($"Here's ur opponent, print y/n to fight or to see the next opponent!");
+            
 
         }
 

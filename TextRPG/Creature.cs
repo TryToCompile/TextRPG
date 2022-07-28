@@ -21,10 +21,12 @@ namespace textRPG
         private double manapool = 100;
         private double stamina = 100;
         private double staminaForAttack = 10;
-        private double armour = 10;
+        private double armor = 10;
         private double attackPower = 10;
         private double damage = 0;
         private double critDamageChance = 10;
+        private double magicArmor = 0;
+        public double MagicArmor { get; set; }
         public double CritDamageChance { get; set; }
         public double Damage { get; set; }
         public double StaminaForAttack { get; set; }
