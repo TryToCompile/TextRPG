@@ -26,6 +26,8 @@ namespace textRPG
         private double damage = 0;
         private double critDamageChance = 10;
         private double magicArmor = 0;
+        private double magicDamage = 0;
+        public double MagicDamage { get; set; }
         public double MagicArmor { get; set; }
         public double CritDamageChance { get; set; }
         public double Damage { get; set; }

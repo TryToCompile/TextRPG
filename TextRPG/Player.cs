@@ -27,7 +27,7 @@ namespace textRPG
         // почитать про сокрытие
         public void ShowProfile ()
         {
-            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack}");
+            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack} Hp:{HpBar} mp:{Manapool}");
             return ;
         }
 

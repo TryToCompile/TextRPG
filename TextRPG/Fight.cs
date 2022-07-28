@@ -32,7 +32,32 @@ namespace textRPG
             player.ShowProfile();
             WriteLine("VS");
             enemy.ShowEnemyProfile();
-            
+            // TODO: add randomiser for queue of the first attack
+            // FIGHT LOOP
+            while (true)
+            {
+                if (player.HpBar < 0)
+                {
+                    WriteLine($"{player.Name} hp is < 0. DEATH");
+                    break;
+                }
+                else if (enemy.HpBar < 0)
+                {
+                    WriteLine($"{enemy.Name} hp is < 0. WIN? "); // TODO: add last chance to kill our player with 0.001% probability, while enemy has < 0 hps
+                }
+                WriteLine("Continue fight?.. y/n to continue or flee");
+                var input = ReadLine();
+                if (input == "n")
+                {
+                    break;
+                } else if (input == "y")
+                {
+                    WriteLine("Ok!Next step ->");// TODO: add variants of attacks (magick, strong/weak attack, or block)
+                    player.Attack(enemy);
+                    enemy.Attack(player);
+                }
+                
+            }
         }
     }
 

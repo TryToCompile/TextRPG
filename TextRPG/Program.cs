@@ -56,9 +56,13 @@ namespace textRPG
                     Enemy enemy = new Enemy("Rat", 40, 1, 200, 0);
                     WriteLine($"Here's ur opponent, print y/n to fight or to see the next opponent!");
                     input = ReadLine();
-                    if (input == "fight" || input == "Fight")
+                    if (input == "fight" || input == "Fight" || input == "y")
                     {
                         loop.Fight(player,enemy);
+                    } else if (input == "n")
+                    {
+                        WriteLine("We have no other opponents to u.");
+                        return;
                     }
                 }
                 else if (input == "End" || input == "end")

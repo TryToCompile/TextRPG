@@ -32,7 +32,34 @@ namespace textRPG
             Manapool = manapool;
             ShowEnemyProfile();
         }
-        
+
+        public double Attack(Player player)
+        {
+            Damage = AttackPower;
+            if (Stamina > StaminaForAttack)
+            {
+                Stamina -= StaminaForAttack;
+                player.HpBar -= Damage - player.Armor;
+
+            } else if (Stamina < StaminaForAttack)
+            {
+                WriteLine($"{Name} have not enough stamina:{Stamina}");
+            }
+            return player.HpBar;
+        }
+
+        public double MagicAttack(Player player)
+        {
+            Damage = MagicDamage;
+            if (Stamina > StaminaForAttack)
+            {
+                Stamina -= StaminaForAttack;
+                player.HpBar -= Damage - player.MagicArmor;
+
+            }
+            return player.HpBar;
+        }
+
 
     }
 
