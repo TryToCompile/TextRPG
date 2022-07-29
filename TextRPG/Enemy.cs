@@ -48,6 +48,7 @@ namespace textRPG
             } else 
             {
                 WriteLine($"{Name} have not enough stamina:{Stamina}");
+
             }
             WriteLine($"Player Hp:{player.HpBar}");
             return;

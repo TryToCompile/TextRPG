@@ -41,7 +41,7 @@ namespace textRPG
                 }
             } catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                WriteLine($"Ошибка: {ex.Message}");
                 Main(args);
             }
             
