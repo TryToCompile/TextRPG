@@ -1,4 +1,5 @@
-﻿/* TODO: 
+﻿using static System.Console;
+/* TODO: 
  * 1) Hi, warrior, choose your name
  * 2) Fight the rat
  * 3) Add system, that allows palyer to type some commands, that will give him information about his stats, profile
@@ -28,6 +29,17 @@ namespace textRPG
         private double critDamageChance = 10;
         private double magicArmor = 0;
         private double magicDamage = 0;
+        private double staminaRegen = 0;
+        private double maxHP = 100;
+        public double MaxHP
+        {
+            get { return maxHP; }
+            set
+            {
+                WriteLine("MAXHP changed");
+            }
+        }
+        public double StaminaRegen { get; set; }   // TODO: тут можно установить init значения, которые будут при инициализации сразу получать значение, посмотреть
         public double MagicDamage { get; set; }
         public double MagicArmor { get; set; }
         public double CritDamageChance { get; set; }
@@ -35,7 +47,24 @@ namespace textRPG
         public double StaminaForAttack { get; set; }
         public double Armor { get; set; }
         public string? Name { get; set; }
-        public double HpBar { get; set; }
+        public double HpBar {
+            get
+            {
+                return hpBar;
+            }
+            set
+            {
+                if (value >= maxHP)
+                {
+                    hpBar = maxHP;
+                    WriteLine($"MAXHP is LOWER than bonused hp");
+                } else
+                {
+                    hpBar = value;
+                }
+                
+            } 
+        }
         public double Manapool { get; set; }
         public double Stamina { get; set; }
         public virtual double AttackPower { get => attackPower; set => attackPower = value; } // по какой-то причине, чтобы оверрайд нормально работал, нужно виртуальное свойство определять с этими стрелочками...

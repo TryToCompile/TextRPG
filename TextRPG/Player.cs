@@ -20,7 +20,13 @@ namespace textRPG
         //  private double weaponAttack = 1; // bare hands
         // private double attack = 10;
         private double magicAttack = 0;
-
+        private double experience = 0;
+        private double expK = 5;
+        private double level = 0;
+        
+        public double Level { get; set; }
+        public double ExpK { get; set; }
+        public double Experience { get; set; }
         public double MagicDamage { get; set; }
         public double WeaponAttack { get; set; }
 
@@ -28,24 +34,57 @@ namespace textRPG
         // почитать про сокрытие
 
 
-        public Player(double hp, double mp, double stamina, double staminaForAttack)
+        public Player(double hp, double mp, double stamina, double staminaForAttack, double maxHP)
         {
             HpBar = hp;
             Manapool = mp;
             Stamina = stamina;
             StaminaForAttack = staminaForAttack;
+            MaxHP = maxHP;
         }
         public void ShowProfile ()
         {
-            WriteLine($"Name:{Name} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} WeaponAttack:{WeaponAttack} Hp:{HpBar} mp:{Manapool}\n stamina:{Stamina}");
+            WriteLine($"Name:{Name} level:{Level} attackPower:{AttackPower} CritDamageChance:{CritDamageChance} \n" +
+                $"WeaponAttack:{WeaponAttack} Hp:{HpBar} mp:{Manapool} stamina:{Stamina}\n " +
+                $"experience:{Experience} maxHP:{MaxHP} armor:{Armor}");
             return ;
+        }
+        public void LevelUp(Player player, Loop loop)
+        {
+            player.AttackPower += player.Level + loop.GetRandomNumber(1.1,2.2);
+            player.MaxHP += loop.GetRandomNumber(10,30);
+            player.HpBar = MaxHP;
+            player.Armor += loop.GetRandomNumber(1,40);
+            WriteLine($"                  level UP!!!!!\n AttackPower now:{player.AttackPower}, \t" +
+                      $"MaxHP now is {MaxHP} and hpBAR now is {HpBar}");
+            player.Level++;
+            player.Experience -= 100;
+            return;
+        }
+        public void GetExperience(Player player, Enemy enemy,Loop loop)
+        {
+            WriteLine("DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            player.Experience += ExpK*(enemy.HpBar + enemy.Armor) / (player.AttackPower + player.WeaponAttack);
+            player.Stamina = 100;
+            player.HpBar = player.MaxHP;
+            if (player.Experience >= 100)
+            {
+                LevelUp(player,loop);
+            }
+            return;
+        }
+
+        public void GetExperience(Player player)
+        {
+
+            return;
         }
 
         public void Attack(Enemy enemy) {
             Damage = WeaponAttack + AttackPower;
             if( Stamina >= StaminaForAttack )
             {
-                WriteLine($"DEBUG player.attack stamina{Stamina} StAttack{StaminaForAttack}");
+        //        WriteLine($"DEBUG player.attack stamina{Stamina} StAttack{StaminaForAttack}");
                 Stamina -= StaminaForAttack;
                 enemy.HpBar -= Damage - enemy.Armor;
 
@@ -53,7 +92,7 @@ namespace textRPG
             {
                 WriteLine($"{Name} have not enough stamina:{Stamina}");
             }
-            WriteLine($"Enemy Hp:{enemy.HpBar}; Enemy Stamina{enemy.Stamina}");
+            WriteLine($"Enemy Hp:{enemy.HpBar}; Enemy Stamina:{enemy.Stamina - enemy.StaminaForAttack}");
             return;
         }
 

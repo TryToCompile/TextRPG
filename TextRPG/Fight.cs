@@ -27,7 +27,7 @@ namespace textRPG
        //     }
        // }
 
-        public void Fight(Player player, Enemy enemy)
+        public void Fight(Player player, Enemy enemy, Loop loop)
         {
             player.ShowProfile();
             WriteLine("VS");
@@ -43,7 +43,10 @@ namespace textRPG
                 }
                 else if (enemy.HpBar <= 0)
                 {
-                    WriteLine($"{enemy.Name} hp is < 0. WIN? "); // TODO: add last chance to kill our player with 0.001% probability, while enemy has < 0 hps
+                    WriteLine($"{enemy.Name} hp is < 0. you WIN!"); // TODO: add last chance to kill our player with 0.001% probability, while enemy has < 0 hps
+                    player.GetExperience(player,enemy,loop);
+
+                    break;
                 }
                 WriteLine("Continue fight?.. y/n to continue or flee");
                 var input = ReadLine();
@@ -52,8 +55,8 @@ namespace textRPG
                     break;
                 } else if (input == "y")
                 {
-                //    WriteLine($"player.stamina:{player.Stamina}; enemy.stamina{enemy.Stamina}");
-                    WriteLine("Ok!Next step ->");// TODO: add variants of attacks (magick, strong/weak attack, or block)
+                    WriteLine("Ok!Attack ->");// TODO: add variants of attacks (magick, strong/weak attack, or block)
+                    
                     player.Attack(enemy);
                     enemy.Attack(player);
                 }

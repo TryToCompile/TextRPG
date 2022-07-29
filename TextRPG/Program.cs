@@ -19,17 +19,26 @@ namespace textRPG
 {
     public partial class Loop
     {
+        public double GetRandomNumber(double min, double max)
+        {
+            Random rand = new Random();
+            return rand.NextDouble() * (max - min) + min;
+        }
         public static void Main(string[] args)
         {
+             double GetRandomNumber(double min, double max)
+            {
+                Random rand = new Random();
+                return rand.NextDouble() * (max - min) + min;
+            }
 
-            
 
             var input = "undefined";
-            Player player = new Player(100,0,100,10); // Вероятно, нужно привести типы, да, разобраться с наследованием этих классов
+            Player player = new Player(100, 0, 100, 10,100); // Вероятно, нужно привести типы, да, разобраться с наследованием этих классов
             Loop loop = new Loop();
- //           player.HpBar = 100; // КОСТЫЛЬ
- //           player.Stamina = 100;
- //           player.StaminaForAttack = 10;
+            //           player.HpBar = 100; // КОСТЫЛЬ
+            //           player.Stamina = 100;
+            //           player.StaminaForAttack = 10;
             WriteLine("!!!!To end the game just type End!!!!\n!!!!To fight just type FF or FindFight!!!!\n!!!!To see profile just type profile!!!!");
             WriteLine("Warrior!\nChoose ur name:");
             try
@@ -44,7 +53,7 @@ namespace textRPG
                 WriteLine($"Ошибка: {ex.Message}");
                 Main(args);
             }
-            
+
             WriteLine($"We are greeting u, the future god - { player.Name}!\nChoose ur weapon -> 1 - assassin's blades (10 dmg); 2 - HAMMER OF THE PURE SOUL (100 dmg) ");
             input = ReadLine();
             if (input == "1")
@@ -62,7 +71,7 @@ namespace textRPG
             //while (player.HpBar > 0)
             while (true)
             {
-                
+
                 WriteLine("FF - new fight, profile - see stats, end - end of the game");
                 input = ReadLine();
                 if (input == "FindFight" || input == "FF" || input == "ff" || input == "findfight")
@@ -74,7 +83,7 @@ namespace textRPG
                     input = ReadLine();
                     if (input == "fight" || input == "Fight" || input == "y")
                     {
-                        loop.Fight(player,enemy);
+                        loop.Fight(player, enemy,loop);
                     } else if (input == "n")
                     {
                         WriteLine("We have no other opponents to u.");
@@ -89,9 +98,12 @@ namespace textRPG
                 {
                     player.ShowProfile();
                 }
-                
+
             }
+
+             
         }
+
     }
 
     

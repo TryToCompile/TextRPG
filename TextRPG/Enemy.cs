@@ -41,16 +41,14 @@ namespace textRPG
             Damage = AttackPower;
             if (Stamina >= StaminaForAttack)
             {
-                WriteLine($"DEBUG enemy.attack stamina{Stamina} StAttack{StaminaForAttack}");
+       //         WriteLine($"DEBUG enemy.attack stamina{Stamina} StAttack{StaminaForAttack}");
                 Stamina -= StaminaForAttack;
                 player.HpBar -= Damage - player.Armor;
-
             } else 
             {
                 WriteLine($"{Name} have not enough stamina:{Stamina}");
-
             }
-            WriteLine($"Player Hp:{player.HpBar}");
+            WriteLine($"Player Hp:{player.HpBar}; Player Stamina:{player.Stamina - player.StaminaForAttack}");
             return;
         }
 
