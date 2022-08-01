@@ -61,7 +61,7 @@ namespace textRPG
             player.Experience -= 100;
             return;
         }
-        public void GetExperience(Player player, Enemy enemy,Loop loop)
+        public void GetExperience(Player player, Enemy enemy,Loop loop) // TODO: проверить всю эту страшную вложенность, правильно ли это? Или же, все-таки, этого совсем не круто
         {
             WriteLine("DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             player.Experience += ExpK*(enemy.HpBar + enemy.Armor) / (player.AttackPower + player.WeaponAttack);
